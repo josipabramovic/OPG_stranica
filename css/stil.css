@@ -1,0 +1,385 @@
+/* Animacija ocitavanja stranice kruzic koji se okrece */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+.loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(184, 134, 11, 0.3);
+  border-top: 5px solid #B8860B;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Osnovni stil */
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background-color: #000;
+  color: #fff;
+  scroll-behavior: smooth;
+}
+
+/* Navigacija */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 20px 60px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  color: #B8860B;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #B8860B;
+}
+/* Dodajte u CSS za navbar */
+.navbar {
+  padding: 15px 60px;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.9);
+  padding: 10px 60px;
+}
+
+/* Hero sekcija */
+.hero {
+  height: 100vh;
+  background: url('../multimedija/klasje.png') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  animation: fadeIn 7s ease;
+}
+
+.hero-logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  color: #B8860B;
+  text-shadow: 0 0 10px #B8860B;
+}
+
+.hero-subtitle {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 12px 28px;
+  border: 2px solid #B8860B;
+  color: #B8860B;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn:hover {
+  background: #B8860B;
+  color: #000;
+  box-shadow: 0 0 20px #B8860B;
+}
+
+/* Animacija */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(30px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* Sekcija o nama */
+.about {
+  padding: 100px 15%;
+  line-height: 1.8;
+  border-top: 1px solid #B8860B;
+  border-bottom: 1px solid #B8860B;
+}
+
+.about h2 {
+  color: #B8860B;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Proizvodi */
+.products {
+  padding: 100px 15%;
+  text-align: center;
+}
+
+.products h2 {
+  color: #B8860B;
+  margin-bottom: 50px;
+}
+
+.product-cards {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: rgba(184, 134, 11, 0.1);
+  border: 1px solid #B8860B;
+  padding: 25px;
+  width: 250px;
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #B8860B;
+}
+
+/* Galerija */
+.gallery {
+  padding: 100px 15%;
+}
+
+.gallery h2 {
+  color: #B8860B;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 220px;
+   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(184, 134, 11, 0.3);
+}
+
+/* Kontakt */
+.contact {
+  padding: 100px 15%;
+  text-align: center;
+  border-top: 1px solid #B8860B;
+}
+
+.contact h2 {
+  color: #B8860B;
+  margin-bottom: 30px;
+}
+
+.contact a {
+  color: #B8860B;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  background: #111;
+  text-align: center;
+  padding: 30px 0;
+  border-top: 1px solid #B8860B;
+}
+
+/* floating elementi */
+.floating-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.floating-element {
+  position: absolute;
+  background: rgba(184, 134, 11, 0.1);
+  border: 1px solid rgba(184, 134, 11, 0.3);
+  border-radius: 50%;
+  animation: float 15s infinite linear;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+/* Media query za manje ekrane */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+    flex-direction: column;
+  }
+  
+  .nav-links {
+    margin-top: 15px;
+    gap: 15px;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .about, .products, .gallery, .contact {
+    padding: 60px 5%;
+  }
+  
+  .product-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Brojevi u sekciji about*/
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 60px 0;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+  padding: 20px;
+}
+
+.number {
+  display: block;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #B8860B;
+  margin-bottom: 10px;
+}
+
+.label {
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+/* ===== CAROUSEL FADE ===== */
+    .carousel-container {
+      position: relative;
+      width: 900px;
+      height: 450px;
+      perspective: 1000px;
+    }
+
+    .carousel {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform-style: preserve-3d;
+      transition: transform 1s ease;
+    }
+
+    .carousel img {
+      position: absolute;
+      width: 70%;
+      height: 80%;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      opacity: 0.7;
+      transform: scale(0.8);
+      transition: transform 1s ease, opacity 1s ease;
+    }
+
+    .carousel img.active {
+      opacity: 1;
+      transform: scale(1) translateZ(100px);
+      z-index: 2;
+    }
+
+    .carousel img.prev {
+      transform: translateX(-250px) rotateY(30deg);
+      z-index: 1;
+    }
+
+    .carousel img.next {
+      transform: translateX(250px) rotateY(-30deg);
+      z-index: 1;
+    }
