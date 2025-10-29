@@ -112,8 +112,6 @@ window.addEventListener('scroll', () => {
   else scrollBtn.classList.remove('show');
 });
 scrollBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
-
-
 // ghjklčć
 const images = document.querySelectorAll('.gallery img');
 const lightbox = document.getElementById('lightbox');
