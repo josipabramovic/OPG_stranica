@@ -50,9 +50,11 @@ body {
   width: 100%;
   top: 0;
   padding: 20px 60px;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 10px rgba(184, 134, 11, 0.1);
   z-index: 100;
+  transition: all 0.4s ease;
 }
 
 .navbar .logo {
@@ -68,6 +70,7 @@ body {
 }
 
 .nav-links a {
+  position: relative;
   color: #fff;
   text-decoration: none;
   transition: color 0.3s;
@@ -76,34 +79,83 @@ body {
 .nav-links a:hover {
   color: #B8860B;
 }
-/* Dodajte u CSS za navbar */
+
 .navbar {
   padding: 15px 60px;
   transition: all 0.3s ease;
 }
 
 .navbar.scrolled {
-  background: rgba(0, 0, 0, 0.9);
-  padding: 10px 60px;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 2px 15px rgba(184, 134, 11, 0.2);
 }
 
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #B8860B;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #B8860B;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: #B8860B;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(0,0,0,0.95);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+}
 /* Hero sekcija */
-.hero {
-  height: 100vh;
-  background: url('../multimedija/klasje.png') no-repeat center center/cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
+
+@keyframes shine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
+/* OLAKŠANO ČITANJE NA POZADINI */
 .hero::after {
   content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* lagano zatamnjenje */
+  z-index: 0;
 }
 
 .hero-content {
@@ -227,6 +279,18 @@ body {
   box-shadow: 0 8px 25px rgba(184, 134, 11, 0.3);
 }
 
+.lightbox {
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 2000;
+}
+.lightbox img {
+  max-width: 90%; max-height: 90%; border: 2px solid #B8860B;
+  border-radius: 10px;
+}
+
+
 /* Kontakt */
 .contact {
   padding: 100px 15%;
@@ -256,7 +320,7 @@ footer {
   border-top: 1px solid #B8860B;
 }
 
-/* floating elementi */
+/* floating elementi 
 .floating-elements {
   position: fixed;
   top: 0;
@@ -279,7 +343,7 @@ footer {
   0% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(180deg); }
   100% { transform: translateY(0) rotate(360deg); }
-}
+}*/
 
 /* Media query za manje ekrane */
 @media (max-width: 768px) {
@@ -311,6 +375,129 @@ footer {
   }
 }
 
+/* ====== MOBILNA OPTIMIZACIJA ====== */
+@media (max-width: 768px) {
+
+  body {
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* Navigacija */
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .menu-toggle {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 70%;
+    background: rgba(0, 0, 0, 0.97);
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    z-index: 999;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
+
+  .nav-links.active {
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .nav-links a {
+    font-size: 1.2rem;
+  }
+
+  /* Hero sekcija */
+  .hero {
+    text-align: center;
+    padding: 100px 5%;
+    background-size: cover;
+  }
+
+  .hero-title {
+    font-size: 1.7rem;
+    line-height: 1.4;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Sekcija o nama */
+  .about {
+    padding: 60px 8%;
+  }
+
+  .stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .stat .number {
+    font-size: 1.8rem;
+  }
+
+  /* Carousel */
+  .carousel-container {
+    overflow: hidden;
+  }
+
+  .carousel img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Proizvodi */
+  .product-cards {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 320px;
+  }
+
+  /* Galerija */
+  .gallery-grid img {
+    height: 180px;
+  }
+
+  /* Kontakt */
+  .contact {
+    padding: 60px 5%;
+    font-size: 0.95rem;
+  }
+
+  /* Scroll to top */
+  #scrollTop {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
 /* Brojevi u sekciji about*/
 .stats {
   display: flex;
@@ -338,48 +525,156 @@ footer {
 }
 
 /* ===== CAROUSEL FADE ===== */
-    .carousel-container {
-      position: relative;
-      width: 900px;
-      height: 450px;
-      perspective: 1000px;
-    }
+.carousel-container {
+  position: relative;
+  width: 50%;
+  max-width: 400px;
+  height: 175px;
+  margin: 50px auto;
+  perspective: 1100px;
+  overflow: visible;
+}
 
-    .carousel {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform-style: preserve-3d;
-      transition: transform 1s ease;
-    }
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+}
 
-    .carousel img {
-      position: absolute;
-      width: 70%;
-      height: 80%;
-      object-fit: contain;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.4);
-      opacity: 0.7;
-      transform: scale(0.8);
-      transition: transform 1s ease, opacity 1s ease;
-    }
+.carousel img {
+  position: absolute;
+  width: 55%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  opacity: 0.6;
+  transform: scale(0.8);
+  transition: transform 1s ease, opacity 1s ease;
+}
 
-    .carousel img.active {
-      opacity: 1;
-      transform: scale(1) translateZ(100px);
-      z-index: 2;
-    }
+/* Aktivna slika u sredini */
+.carousel img.active {
+  opacity: 1;
+  transform: scale(1) translateZ(100px);
+  z-index: 3;
+}
 
-    .carousel img.prev {
-      transform: translateX(-250px) rotateY(30deg);
-      z-index: 1;
-    }
+/* Lijeva slika */
+.carousel img.prev {
+  transform: translateX(-250px) rotateY(30deg) scale(0.8);
+  opacity: 0.7;
+  z-index: 2;
+}
 
-    .carousel img.next {
-      transform: translateX(250px) rotateY(-30deg);
-      z-index: 1;
-    }
+/* Desna slika */
+.carousel img.next {
+  transform: translateX(250px) rotateY(-30deg) scale(0.8);
+  opacity: 0.7;
+  z-index: 2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carousel img {
+    width: 80%;
+  }
+  .carousel img.prev,
+  .carousel img.next {
+    transform: translateX(-150px) rotateY(20deg) scale(0.75);
+  }
+  .carousel img.next {
+    transform: translateX(150px) rotateY(-20deg) scale(0.75);
+  }
+}
+
+/*Dalje nastavak*/
+
+.hero {
+  position: relative;
+  height: 100vh;
+  background: url('../multimedija/klasje.png') center center / cover no-repeat fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* ZLATNO SVJETLO IZA TEKSTA- na pocetku */
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212,175,55,0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  animation: glow 6s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0.7; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* SADRŽAJ HERO SEKCIJE- dodatk */
+
+.hero-content h1 {
+  font-size: 3rem;
+  color: #d4af37;
+  margin-bottom: 1rem;
+}
+
+.hero-content h1 span {
+  background: linear-gradient(90deg, #d4af37, #b8860b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; 
+}
+
+.animated-text {
+  font-size: 1.8rem;
+  color: #b8860b;
+  position: relative;
+  min-height: 3em; /* povećano kako bi se cijeli tekst prikazao */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.animated-text span {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  text-align: center;
+  animation: fadeText 9s infinite;
+}
+
+
+.animated-text span:nth-child(1) { animation-delay: 0s; }
+.animated-text span:nth-child(2) { animation-delay: 3s; }
+.animated-text span:nth-child(3) { animation-delay: 6s; }
+
+/* FADE IN / FADE OUT EFEKT */
+@keyframes fadeText {
+  0%, 100% { opacity: 0; transform: translateY(10px); }
+  10%, 30% { opacity: 1; transform: translateY(0); }
+  40%, 90% { opacity: 0; transform: translateY(-10px); }
+}
+
+#scrollTop {
+  position: fixed; bottom: 20px; right: 20px;
+  background: #B8860B; border: none; color: #000;
+  padding: 10px 15px; border-radius: 50%;
+  font-size: 1.2rem; cursor: pointer; display: none;
+}
+#scrollTop.show { display: block; }

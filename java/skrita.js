@@ -14,6 +14,11 @@
     }
   });
 
+  window.addEventListener('scroll', () => {
+  document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+
   // Brojčani counter
 function animateNumbers() {
   const numbers = document.querySelectorAll('.number');
@@ -41,37 +46,117 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       animateNumbers();
-      observer.unobserve(entry.target);
+      observer.disconnect();
     }
   });
-}, {
-   threshold: 0.3,
-  rootMargin: '0px 0px -100px 0px' 
 });
+observer.observe(document.querySelector('.stats'));
 
-observer.observe(document.querySelector('.about'));
 
 // Galerija 
 
 const slides = document.querySelectorAll('.carousel img');
-    let current = 0;
+let current = 0;
 
-    function updateCarousel() {
-      slides.forEach((slide, index) => {
-        slide.classList.remove('active', 'prev', 'next');
-        if (index === current) {
-          slide.classList.add('active');
-        } else if (index === (current + 1) % slides.length) {
-          slide.classList.add('next');
-        } else if (index === (current - 1 + slides.length) % slides.length) {
-          slide.classList.add('prev');
-        }
-      });
+function updateCarousel() {
+  slides.forEach((slide, index) => {
+    slide.classList.remove('prev', 'active', 'next');
+    if(index === current) {
+      slide.classList.add('active');
+    } else if(index === (current + 1) % slides.length) {
+      slide.classList.add('next');
+    } else if(index === (current - 1 + slides.length) % slides.length) {
+      slide.classList.add('prev');
     }
+  });
+}
 
-    function nextSlide() {
-      current = (current + 1) % slides.length;
-      updateCarousel();
-    }
+// Automatska rotacija
+setInterval(() => {
+  current = (current + 1) % slides.length;
+  updateCarousel();
+}, 3000);
 
-    setInterval(nextSlide, 3000); // automatska rotacija svakih 3 sekunde
+// Prvo pozivanje da se inicijalno postave klase
+updateCarousel();
+
+
+//navigacija
+
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+  menuToggle.classList.toggle('open');
+});
+
+//lightbox
+
+document.querySelectorAll('.gallery-grid img').forEach(img => {
+  img.addEventListener('click', () => {
+    const overlay = document.createElement('div');
+    overlay.classList.add('lightbox');
+    overlay.innerHTML = `<img src="${img.src}" alt="">`;
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', () => overlay.remove());
+  });
+});
+
+
+// scroll do vrha
+
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) scrollBtn.classList.add('show');
+  else scrollBtn.classList.remove('show');
+});
+scrollBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+
+// ghjklčć
+const images = document.querySelectorAll('.gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.querySelector('.lightbox-img');
+const closeBtn = document.querySelector('.close');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+
+let currentIndex = 0;
+
+function showLightbox(index) {
+  currentIndex = index;
+  lightboxImg.src = images[index].src;
+  lightbox.classList.add('show');
+}
+
+images.forEach((img, index) => {
+  img.addEventListener('click', () => showLightbox(index));
+});
+
+closeBtn.addEventListener('click', () => {
+  lightbox.classList.remove('show');
+});
+
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  lightboxImg.src = images[currentIndex].src;
+});
+
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % images.length;
+  lightboxImg.src = images[currentIndex].src;
+});
+
+// Zatvaranje klikom izvan slike
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) lightbox.classList.remove('show');
+});
+
+// Tipke na tipkovnici
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('show')) return;
+  if (e.key === 'ArrowRight') nextBtn.click();
+  if (e.key === 'ArrowLeft') prevBtn.click();
+  if (e.key === 'Escape') lightbox.classList.remove('show');
+});

@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OPG Abramović — obiteljsko gospodarstvo iz Ašikovaca s tradicijom uzgoja žitarica, svinja, meda i voća. Kvaliteta koja dolazi iz obiteljske predanosti.">
+  <meta property="og:title" content="OPG Abramović">
+  <meta property="og:description" content="Obiteljsko poljoprivredno gospodarstvo s tradicijom i kvalitetom.">
   <title>OPG Abramović</title>
 
   <!-- Google Font -->
@@ -19,6 +22,11 @@
   <header>
     <nav class="navbar">
       <div class="logo">OPG Abramović</div>
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <ul class="nav-links">
         <li><a href="#pocetna">Početna</a></li>
         <li><a href="#onama">O nama</a></li>
@@ -30,7 +38,20 @@
   </header>
 
   <!-- Hero sekcija -->
+<section class="hero">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h1>Dobrodošli na <span>OPG Abramović</span></h1>
+    <h2 class="animated-text">
+      <span>Tradicionalna kvaliteta</span>
+      <span>Inovativna poljoprivreda</span>
+      <span>Snaga obitelji</span>
+    </h2>
+  </div>
+</section>
+
   <section id="pocetna" class="hero">
+    <div class="overlay"></div>
     <div class="hero-content">
       <!-- <img src="multimedija/logo.jpg" alt="Logo OPG Abramović" class="hero-logo"> -->
       <h1 class="hero-title">Iz zlatne doline tamo gdje priroda susreće trud</h1>
@@ -66,22 +87,16 @@
   </div>
 </div>
   </section>
+<!-- Pomicna galerija -->
 <section class="carousel-container">
   <div class="carousel">
-    <div class="slide fade">
-      <img src="multimedija/ratarstvo.png" alt="Žitarice">
-    </div>
-    <div class="slide fade">
-      <img src="multimedija/svinjogojstvo.png" alt="Svinjogojstvo">
-    </div>
-    <div class="slide fade">
-      <img src="multimedija/pcelarstvo.png" alt="Med i pčelarstvo">
-    </div>
-    <div class="slide fade">
-      <img src="multimedija/vocarstvo.png" alt="Voćarstvo">
-    </div>
+    <img src="multimedija/ratarstvo.png" alt="Žitarice" class="active">
+    <img src="multimedija/svinjogojstvo.png" alt="Svinjogojstvo" class="next">
+    <img src="multimedija/pcelarstvo.png" alt="Med i pčelarstvo">
+    <img src="multimedija/Snimka zaslona 2025-05-20 231005.png" alt="Voćarstvo" class="prev">
   </div>
-</section><br><br>
+</section>
+
 
   <!-- Proizvodi -->
   <section id="proizvodi" class="products">
@@ -105,6 +120,7 @@
       </div>
     </div>
   </section>
+<button id="scrollTop">↑</button>
 
   <!-- Galerija -->
   <section id="galerija" class="gallery">
@@ -114,6 +130,7 @@
       <img src="multimedija/zrna.png" alt="Svinjogojstvo">
     </div>
   </section>
+  
   <!-- Kontakt -->
   <section id="kontakt" class="contact">
     <h2>Kontakt</h2>
